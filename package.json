@@ -1,7 +1,7 @@
 {
-  "name": "nodetest",
+  "name": "steam-library-checker",
   "version": "1.0.0",
-  "description": "",
+  "description": "a simple webapp to compare steam libraries",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "dotenv": "^7.0.0",
     "express": "^4.16.3",
     "request": "^2.87.0"
   }

@@ -7,22 +7,26 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+	<script type="application/javascript" src="config.js"></script>
     <script type="application/javascript" src="clientscript.js"></script>
     <title>Steam Library Checker</title>
+	<link rel="icon" href="/resources/images/icon.png">
 </head>
 
 
 <body>
-
-    <div class="row headingcontainer">
-        <div class="col-sm-12">
-            <h1 class="text-center">Steam Library Checker</h1>
-        </div>
+	<div class="container-fluid">
+    <div class="headingcontainer">
+        
+            <h1 class="text-center default-text">Steam Library Checker</h1>
+			<h4 class="text-center default-text">Check which games both you and your friends have<h4>
+        
     </div>
     <div class="row contentcontainer">
         <div class="col-sm-2">
             <div id="sidebar">
-                <select id="sortResult">
+			<div class="row">
+                <select id="sortResult" class="custom-select">
                     <option value="compareAlphabetical" selected="selected">Alphabtical ascending</option>
                     <option value="compareAlphabeticalReverse">Alphabtical descending</option>
                     <option value="compareTotalPlaytime">Combined Playtime descending</option>
@@ -31,24 +35,32 @@
                     <option value="compareWeightedPlaytimeReverse">Weighted Playtime ascending</option>
                 </select>
                 <br>
+				<br>
+			</div>
                 <div id="steam_profiles">
                 </div>
 
                 <div>
-                    Steam ID:
-                    <input type="text" name="steam_id" id="steam_id">
-                    <input type="button" value="Add" id="addId">
-
+				<div class="row">
+				
+                    <input type="text" name="steam_id" id="steam_id" class="form-control input-sm col-md-8" placeholder="Steam ID">
+					
+                    <input type="button" value="Add" id="addId" class="btn btn-outline-success col-md-3">
+				</div>
                     <br>
                 </div>
             </div>
         </div>
         <div class="col-sm-10">
+		
             <div id="gamelist">
 
             </div>
+			<div><p class="text-center default-text">Try it out by entering your Steam-ID or Profile-URL on the left!</p><div>
         </div>
+	
     </div>
+	</div>
 
 
 </body>

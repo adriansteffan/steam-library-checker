@@ -8,6 +8,10 @@ var timeSpentOnSteam = {};
 var profilesListDivName = "#steam_profiles";
 var gamesListDivName = "#gamelist";
 
+//imported from config.js
+hostip = HOST;
+port = PORT;
+
 function diff(arr1, arr2) {
     var ret = [];
     for (var i in arr1) {
@@ -87,7 +91,7 @@ function renderGameList(library, compareFunc) {
         compareFunc = typeof compareFunc !== 'undefined' ? compareFunc : ComparingFuncs.compareAlphabetical;
         library.sort(compareFunc);
         for (var game of library) {
-            renderedGames += '<div class="col-sm-3 gamecontainer"><img class="gamelogo" src="http://media.steampowered.com/steamcommunity/public/images/apps/' + game.appid + '/' + game.img_logo_url + '.jpg" alt="' + game.name + '"><div class="gametitle">' + game.name + '</div></div>';
+            renderedGames += '<div class="col-sm-3 gamecontainer"><a href="https://store.steampowered.com/app/' + game.appid + ' " target="_blank"><img class="gamelogo" src="http://media.steampowered.com/steamcommunity/public/images/apps/' + game.appid + '/' + game.img_logo_url + '.jpg" alt="' + game.name + '"></a><div class="default-text gametitle">' + game.name + '</div></div>';
         }
     }
     renderedGames += "</div>"
@@ -101,10 +105,10 @@ function renderProfileList() {
     $(profilesListDivName).empty();
     for (var key in profiles) {
         var profile = profiles[key];
-
-        var renderedProfile = '<img src="' + profile.avatar + '" alt="' + profile.name + '">';
-        renderedProfile += profile.name;
-        renderedProfile += '<input type="button" value="Remove" onclick=removeId("' + key + '")></input><br>';
+		
+        var renderedProfile = '<img src="' + profile.avatar + '" alt="' + profile.name + '" class="profile-picture">';
+        renderedProfile += '<span class="default-text">  ' + profile.name + '  </span>';
+        renderedProfile += '<input type="button" value="X" onclick=removeId("' + key + '") class="btn btn-outline-danger"></input><br><br>';
 
         $(profilesListDivName).append(renderedProfile).show();
     }
@@ -136,7 +140,7 @@ function resolveId(input) {
         addId(input);
     } else {
         $.ajax({
-            url: "http://127.0.0.1:3000/resolveid_post",
+            url: "http://"+hostip+":"+port+"/resolveid_post",
             method: 'GET',
             data: { vanityurl: input }
         }).done(function (data) {
@@ -159,14 +163,14 @@ function addId(input_id) {
     }
 
     $.ajax({
-        url: "http://127.0.0.1:3000/games_post",
+        url: "http://"+hostip+":"+port+"/games_post",
         method: 'GET',
         data: { steam_id: input_id }
     }).done(function (data) {
 
 
-        if (data.success) {
-
+        if (data.success && data.data) {
+			console.log(data);
             gameLibraries[input_id] = data.data;
             for (var game of data.data) {
                 if (typeof timeSpentOnSteam[input_id] === 'undefined') { timeSpentOnSteam[input_id] = 0; }
@@ -182,7 +186,27 @@ function addId(input_id) {
                 totalPlaytimes[game.appid] += game.playtime_forever;
             }
             renderGameList(compareLibraries(gameLibraries), ComparingFuncs[$("#sortResult").val()]);
-            renderProfileList();
+ 
+			
+			//Only add user profile if game library retrieval was successful (move code?)
+			
+			$.ajax({
+				url: "http://"+hostip+":"+port+"/playerinfo_post",
+				method: 'GET',
+				data: { steam_id: input_id }
+				}).done(function (data) {
+
+
+					if (data.success && (typeof data.data !== "undefined")) {
+						profiles[input_id] = { name: data.data.personaname, avatar: data.data.avatarmedium };
+						renderProfileList();
+						return;
+					}
+				}).fail(function () {
+					console.log('failed to load playerinfo');
+					return;
+				});
+	
             return;
         }
     }).fail(function () {
@@ -191,22 +215,7 @@ function addId(input_id) {
     });
 
 
-    $.ajax({
-        url: "http://127.0.0.1:3000/playerinfo_post",
-        method: 'GET',
-        data: { steam_id: input_id }
-    }).done(function (data) {
-
-
-        if (data.success) {
-            profiles[input_id] = { name: data.data.personaname, avatar: data.data.avatarmedium };
-            renderProfileList();
-            return;
-        }
-    }).fail(function () {
-        console.log('failed to load playerinfo');
-        return;
-    });
+    
 };
 
 
@@ -232,5 +241,14 @@ $(document).on("change", "#sortResult", function () {
     console.log("select");
     renderGameList(compareLibraries(gameLibraries), ComparingFuncs[$("#sortResult").val()]);
 });
+
+//Add enter key functionality
+$(document).keypress(function(event){
+	var keycode = (event.keyCode ? event.keyCode : event.which);
+	if(keycode == '13'){
+		document.getElementById("addId").click();
+	}
+});
+
 
 

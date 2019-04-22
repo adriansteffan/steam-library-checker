@@ -1,16 +1,64 @@
 
+html, body {
+    margin: 0;
+    height: 100%;
+
+}
+
+h1 {
+	padding-top: 3vh;
+    
+}
+
+@media only screen and (max-width:480px){
+
+    h4 { display:none; }
+  }
+
+.container-fluid {
+	width: 100%;
+	padding: 0px;
+	
+}
+
+.default-text {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-weight: 300;
+    color: #fefefe;
+}
+
+
 .headingcontainer {
-    height:10vh;
+    height:15vh;
+
+	background-image:  linear-gradient(
+                                                            rgba(0, 0, 0, 0.8), 
+                                                            rgba(0, 0, 0, 0.8)
+                                                          ),
+                      url("/resources/images/steamlibrary.jpg"); 
+	background-repeat: no-repeat;
+	background-size: cover;
+	width:100%;
+	background-position: 0% 30%; 
     background-color:#091a24;
 }
 
 .contentcontainer{
+	padding-top: 4vh;
     background-color:#041017;
+	margin: 0;
+    min-height: 85vh;
+	width: 100%;
+}
+
+.profile-picture{
+	border-radius: 15px;
 }
 
 .gamecontainer{/*?????*/
     margin-bottom: 25px;
 }
+
 
 .gamelogo {
     display: block;
@@ -18,15 +66,19 @@
     margin-right: auto;
     height: 105px;
     width:276px;
+	transition: .3s ease;
+	border-radius: 2px;
+}
+
+.gamelogo:hover {
+    opacity: 0.7;
+	transform: scale(1.25)
 }
 
 .gametitle {
-    font-family: Arial, Helvetica, sans-serif;
-    color: #fefefe;
     text-align: center;
 }
 
-h1 {
-    font-family: Arial, Helvetica, sans-serif;
-    color: #fefefe;
-}
+
+
+

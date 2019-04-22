@@ -1,22 +1,15 @@
 const request = require('request');
 const express = require('express');
+var fs = require('fs');
+require('dotenv').config();
 
 
-/**Backlog:
-	Layout
 
-	selection of tags
+// file is included here:
+eval(fs.readFileSync('./public/config.js')+'');
 
-	Config file
-	refactor
-	
-	Readme
-	Comments
-**/
-
-
-const apikey = '889C6B1C909956CBE05B901E355D3EE9';
-const port = 3000;
+const apikey = process.env.API;//'889C6B1C909956CBE05B901E355D3EE9';
+const port = PORT//3000;
 
 const headers = {
 	'User-Agent': 'SteamAPITest',
@@ -45,7 +38,11 @@ function getGames(id, res) {
 			res.send({ success: false, error : parseError});
 			return;
 			}
-			res.send({ success: true, data:  games});
+			if(games){
+				res.send({ success: true, data:  games});
+			}else{
+				res.send({ success: false, error : "no games found"});
+			}
 		}
 		
 	});
