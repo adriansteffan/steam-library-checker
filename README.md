@@ -6,7 +6,7 @@ This is a somewhat old project of mine, but I decided to polish the UI a bit and
 
 ### Trying it out
 
-I will host a version of this webapp under my personal domain soon!
+Check it out at [steamchecker.adriansteffan.tech/](https://steamchecker.adriansteffan.tech/)
 
 ## Prerequisites
 
