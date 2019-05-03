@@ -2,7 +2,7 @@
 
 This webapp helps you find steam games to play with your friends by showing you what games every one of you owns. 
 
-This is a somewhat old project of mine, but I decided to polish the UI a bit and make it public. (Don't expect any breathtaking usage of web technologies.)
+This is a somewhat old project of mine, but I decided to polish the UI a bit and make it public. (Don't expect any breathtaking usage of web technologies or best practices)
 
 ### Trying it out
 
