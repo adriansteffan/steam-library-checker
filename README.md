@@ -4,13 +4,10 @@ This webapp helps you find steam games to play with your friends by showing you 
 
 This is a somewhat old project of mine, but I decided to polish the UI a bit and make it public. (Don't expect any breathtaking usage of web technologies or best practices)
 
-### Trying it out
-
-Check it out at [steamchecker.adriansteffan.tech/](https://steamchecker.adriansteffan.tech/)
 
 ## Prerequisites
 
-There are a few requirements if you wish to self host this app yourself:
+There are a few requirements if you wish to host this app yourself:
 
 1. You will need a recent verion of [node.js](https://nodejs.org/en/download/).
 2. You need to aquire a personal [Steam API Key](https://steamcommunity.com/dev/apikey).
@@ -37,5 +34,5 @@ node main.js
 
 ## Authors
 
-* **Adrian Steffan**   [adriansteffan](https://github.com/adriansteffan)
+* **Adrian Steffan**   [adriansteffan](https://github.com/adriansteffan) [website](https://adriansteffan.com/)
 
